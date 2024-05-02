@@ -1,18 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _checkRadius;
+
+    [SerializeField] private Transform _groundChecker;
+
+    [SerializeField] private KeyCode _jumpKey = (KeyCode.Space);
+
+    [SerializeField] private LayerMask _whatIsGround;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    private float _horizontal;
+    private bool _isFacingRight = true;
+    private bool _isGrounded;
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
     {
-        
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _rigidbody.velocity = new Vector2(_horizontal * _movementSpeed, _rigidbody.velocity.y);
+        if (!_isFacingRight && _horizontal > 0)
+        {
+            Flip();
+
+        }
+        else if (_isFacingRight && _horizontal < 0)
+        {
+            Flip();
+        }
+        _isGrounded = Physics2D.OverlapCircle(_groundChecker.position, _checkRadius, _whatIsGround);
+
+        if(_isGrounded == true && Input.GetKeyDown(_jumpKey))
+        {
+            Jump();
+        }
+    }
+
+    private void Flip()
+    {
+        _isFacingRight = !_isFacingRight;
+        if (_isFacingRight)
+        {
+            _spriteRenderer.flipX = false;
+        }
+        else if(! _isFacingRight)
+        {
+            _spriteRenderer.flipX = true;
+        }
+    }
+
+    private void Jump()
+    {
+        _rigidbody.velocity = Vector2.up * _jumpForce;
     }
 }
