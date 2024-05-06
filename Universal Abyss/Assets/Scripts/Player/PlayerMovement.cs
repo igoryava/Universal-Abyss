@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
+    private IsAttachedPlatform _isAttached;
     private float _horizontal;
     private bool _isFacingRight = true;
     private bool _isGrounded;
@@ -39,9 +40,17 @@ public class PlayerMovement : MonoBehaviour
         }
         _isGrounded = Physics2D.OverlapCircle(_groundChecker.position, _checkRadius, _whatIsGround);
 
-        if(_isGrounded == true && Input.GetKeyDown(_jumpKey))
+        if (_isGrounded == true && Input.GetKeyDown(_jumpKey))
         {
             Jump();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (_horizontal != 0)
+        {
+            transform.SetParent(transform.parent, false);
         }
     }
 
