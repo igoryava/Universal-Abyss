@@ -7,19 +7,10 @@ public class Health : MonoBehaviour
     private float _currentHealth;
 
     public event Action<float> HealthChanged;
-    private bool _dead;
 
     private void Start()
     {
         _currentHealth = _maxHealth;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeHealth(-10);
-        }
     }
 
     public void TakeDamage(float damage)
