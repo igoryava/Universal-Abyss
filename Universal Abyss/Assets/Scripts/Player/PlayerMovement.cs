@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _checkRadius;
+    [SerializeField] private int _extraJumpsValue;
 
     [SerializeField] private Transform _groundChecker;
 
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
+    private int _extraJumps;
     private IsAttachedPlatform _isAttached;
     private float _horizontal;
     private bool _isFacingRight = true;
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        _extraJumps = _extraJumpsValue;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -40,18 +43,16 @@ public class PlayerMovement : MonoBehaviour
         }
         _isGrounded = Physics2D.OverlapCircle(_groundChecker.position, _checkRadius, _whatIsGround);
 
-        if (_isGrounded == true && Input.GetKeyDown(_jumpKey))
+        if (_isGrounded == true)
+        {
+            _extraJumps = _extraJumpsValue;
+        }
+
+        if (_extraJumps > 0 && Input.GetKeyDown(_jumpKey))
         {
             Jump();
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (_horizontal != 0)
-        {
-            transform.SetParent(transform.parent, false);
-        }
+        
     }
 
     private void Flip()
@@ -70,5 +71,6 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         _rigidbody.velocity = Vector2.up * _jumpForce;
+        _extraJumps--;
     }
 }

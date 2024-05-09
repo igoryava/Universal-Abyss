@@ -2,24 +2,35 @@ using UnityEngine;
 
 public class IsAttachedPlatform : MonoBehaviour
 {
-    [SerializeField] private LayerMask _whatIsPlatform;
+    private float _horizontal;
 
     private Rigidbody2D _rigidbody;
     public bool IsAttached;
 
-    void Start()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        _horizontal = Input.GetAxis("Horizontal");
+    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<CanPlayerStepOnPlatform>(out CanPlayerStepOnPlatform stepOnPlatform))
         {
+            if (_horizontal != 0)
+            {
+                transform.SetParent(null);
+                return;
+            }
+
             transform.SetParent(collision.transform);
             _rigidbody.gravityScale = 0;
             IsAttached = true;
+
         }
     }
 
