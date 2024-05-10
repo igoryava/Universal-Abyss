@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpikeDamage : MonoBehaviour
+public class PatrollerEnemyGiveDamage : MonoBehaviour
 {
     [SerializeField] private float _damage;
 
