@@ -1017,6 +1017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553430130}
   - component: {fileID: 553430131}
+  - component: {fileID: 553430133}
   m_Layer: 0
   m_Name: PatrollerEnemy
   m_TagString: Untagged
@@ -1049,7 +1050,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 553430129}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2a7f891edb8090447894ba173fcce2da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1085,6 +1086,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46432495, y: 0.7678735}
   m_EdgeRadius: 0
+--- !u!114 &553430133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553430129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c740e5fdb938c458dd6e3c65c996b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waypoints:
+  - {fileID: 1139625163}
+  - {fileID: 492195591}
+  _enemySpeed: 3
+  _spriteRenderer: {fileID: 1798813031}
 --- !u!1 &822073844
 GameObject:
   m_ObjectHideFlags: 0
