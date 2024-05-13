@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _checkRadius;
     [SerializeField] private int _extraJumpsValue;
-
     [SerializeField] private Transform _groundChecker;
 
     [SerializeField] private KeyCode _jumpKey = (KeyCode.Space);
@@ -68,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         _rigidbody.velocity = Vector2.up * _jumpForce;
         _extraJumps--;

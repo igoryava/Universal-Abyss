@@ -40,10 +40,8 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Death()
+    public virtual void Death()
     {   
-        GetComponent<PlayerMovement>().enabled = false;
         HealthChanged?.Invoke(0);
-        Debug.Log("YOU DEAD");
     }
 }
