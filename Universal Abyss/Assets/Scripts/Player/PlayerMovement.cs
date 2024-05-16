@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _extraJumps = _extraJumpsValue;
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -51,6 +52,17 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+
+        if(_isGrounded == true)
+        {
+            _animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            _animator.SetBool("Jumping", true);
+        }
+
+        _animator.SetFloat("HorizontalMove", Mathf.Abs(_horizontal));
         
     }
 

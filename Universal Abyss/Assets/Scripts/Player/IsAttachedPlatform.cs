@@ -28,7 +28,6 @@ public class IsAttachedPlatform : MonoBehaviour
             }
 
             transform.SetParent(collision.transform);
-            _rigidbody.gravityScale = 0;
             IsAttached = true;
 
         }
@@ -39,7 +38,6 @@ public class IsAttachedPlatform : MonoBehaviour
         if (collision.gameObject.TryGetComponent<CanPlayerStepOnPlatform>(out CanPlayerStepOnPlatform stepOnPlatform))
         {
             transform.SetParent(null);
-            _rigidbody.gravityScale = 1;
             IsAttached = false;
         }
     }
