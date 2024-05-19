@@ -8,6 +8,10 @@ public class PatrollerEnemyHealth : Health
     public override void Death()
     {
         base.Death();
+    }
+
+    public void DeathAnimationEnd()
+    {
         Destroy(_enemyParent);
     }
 }
