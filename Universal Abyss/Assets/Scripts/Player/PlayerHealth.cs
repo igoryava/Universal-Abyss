@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : Health
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _playerDeath;
 
     private void Start()
     {
@@ -13,6 +14,7 @@ public class PlayerHealth : Health
     {
         base.Death();
         _animator.SetBool("Dead", true);
+        _playerDeath.Play();
     }
 
     public void DeathAnimationEnd()

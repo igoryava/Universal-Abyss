@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private AudioSource _playerWalk;
+    [SerializeField] private AudioSource _playerJump;
 
     private int _extraJumps;
     private IsAttachedPlatform _isAttached;
@@ -30,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Walk();
         _horizontal = Input.GetAxisRaw("Horizontal");
-        _rigidbody.velocity = new Vector2(_horizontal * _movementSpeed, _rigidbody.velocity.y);
         if (!_isFacingRight && _horizontal > 0)
         {
             Flip();
@@ -83,5 +85,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.velocity = Vector2.up * _jumpForce;
         _extraJumps--;
+        _playerJump.Play();
+    }
+
+    private void Walk()
+    {
+        _rigidbody.velocity = new Vector2(_horizontal * _movementSpeed, _rigidbody.velocity.y);
+        _playerWalk.Play();
     }
 }

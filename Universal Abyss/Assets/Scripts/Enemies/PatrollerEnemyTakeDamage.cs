@@ -7,6 +7,7 @@ public class PatrollerEnemyTakeDamage : MonoBehaviour
     [SerializeField] private PatrollerEnemyHealth _health;
     [SerializeField] private PlayerMovement _movement;
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _enemyDeath;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class PatrollerEnemyTakeDamage : MonoBehaviour
         {
             _animator.SetTrigger("Dead");
             _health.TakeDamage(_damage);
+            _enemyDeath.Play();
             _movement.Jump();
         }
     }
