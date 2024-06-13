@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
         _extraJumps = _extraJumpsValue;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+
+        YandexGame.FullscreenShow();
     }
 
     private void Update()
